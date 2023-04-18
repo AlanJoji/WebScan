@@ -4,7 +4,7 @@ from requests import *
 
 
 # Functions
-def connection_request (url) :
+def check_url (url) :
     result = False
     try :
         response = get(url)
@@ -19,19 +19,11 @@ def connection_request (url) :
 
 
 def url_is_safe (url) :
-    result = connection_request(url)
+    result = check_url(url)
     return result
 
 
-def hostname_is_safe (hostname) :
-    context = create_default_context()
-
-    unsecure_socket = create_connection((hostname, 443))    
-    result = verify_certificate(context, unsecure_socket)
-
-    return result
-
-def verify_certificate (context, unsecure_socket) :
+def check_hostname (context, unsecure_socket) :
     result = False
     try :
         secure_socket = context.wrap_socket(unsecure_socket, server_hostname = hostname)
@@ -52,6 +44,14 @@ def verify_certificate (context, unsecure_socket) :
         print(error)
 
         return result
+
+def hostname_is_safe (hostname) :
+    context = create_default_context()
+
+    unsecure_socket = create_connection((hostname, 443))    
+    result = check_hostname(context, unsecure_socket)
+
+    return result
 
 # Main
 if __name__ == "__main__" :
