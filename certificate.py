@@ -1,3 +1,6 @@
+# SSL Certificate Checking
+# By: Alan Joji
+# Created: 19.04.2023
 from socket import *
 from ssl import *
 from requests import *
@@ -41,11 +44,12 @@ def url_is_safe (url) :
     return result
 
 
-def check_hostname (context, unsecure_socket) :
+def check_hostname (context, unsecure_socket, hostname) :
     """
     Input:  
         Context for SSL set up using the HTTPS port (443)
         Unsecure Socket which has already been connected to the server
+        Hostname for the website
     Action: 
         Wraps a SSL context to the existing unsecure port to check whether the site is secure
     Output:     
@@ -86,7 +90,7 @@ def hostname_is_safe (hostname) :
     context = create_default_context()
 
     unsecure_socket = create_connection((hostname, 443))    
-    result = check_hostname(context, unsecure_socket)
+    result = check_hostname(context, unsecure_socket, hostname)
 
     return result
 
