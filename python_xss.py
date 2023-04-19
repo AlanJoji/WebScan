@@ -5,18 +5,22 @@ from requests import *
 
 # Functions
 def is_python_xss_vulnerable (url) :
-    payload = "<script>alert(XSS)</script>"
-    request = post(url + payload)
+    try :
+        payload = "<script>alert(XSS)</script>"
+        request = post(url + payload)
 
 
-    if (payload in request.text) :
-        print("XSS Vulnerability Found")
-    else :
-        print("Secure")
+        if (payload in request.text) :
+            print("XSS Vulnerability Found")
+        else :
+            print("Secure")
+
+    except Exception as exception:
+        print(exception)
 
 
 def tester () :
-    url = "https://example.com/"
+    url = "https://www.yahoo.com/"
     is_python_xss_vulnerable(url)
 
 
