@@ -12,8 +12,10 @@ def is_python_xss_vulnerable (url) :
 
         if (payload in request.text) :
             print("XSS Vulnerability Found")
+            return True
         else :
             print("Secure")
+            return False
 
     except Exception as exception:
         print(exception)

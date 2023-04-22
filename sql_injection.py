@@ -131,12 +131,14 @@ def sql_is_safe (url, session) :
 
             if is_sql_vulnerable(response) == True :
                 print("SQL Injection Attack Possible @", url)
+                return True
                 print()
 
             else :
                 print("No SQL Injection Attack Possible @", url)
                 print()
                 break
+    return False   
 
 def tester () :
     session = Session()

@@ -87,12 +87,15 @@ def hostname_is_safe (hostname) :
         True for Site with SSL Certificate 
         False for Site without SSL Certifcate 
     """
-    context = create_default_context()
+    try :
+        context = create_default_context()
 
-    unsecure_socket = create_connection((hostname, 443))    
-    result = check_hostname(context, unsecure_socket, hostname)
+        unsecure_socket = create_connection((hostname, 443))    
+        result = check_hostname(context, unsecure_socket, hostname)
 
-    return result
+        return result
+    except error :
+        return None
 
 def tester () :
     hostname = "www.facebook.com"
