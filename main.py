@@ -32,9 +32,9 @@ else :
     url_result = url_is_safe(url)
 
     if url_result == True :
-        st.write(url, " has a valid SSL Certificate")
+        st.write(url, " **has a valid SSL Certificate**")
     elif url_result == False :
-        st.write(url, " has a invalid/no SSL Certificate")
+        st.write(url, " **has a invalid/no SSL Certificate**")
 
 st.markdown( """ 
 > _Check Terminal for Information about Certificate and 2nd Part of 4 Way TLS Handshake_
@@ -51,16 +51,15 @@ st.markdown( """
 """
 , True)
 
-url =  st.text_input("Link")
 if not url :
     pass
 else :
     url_result = is_python_xss_vulnerable(url)
 
     if url_result == True :
-        st.write(url, " is Vulnerable to R-XSS")
+        st.write(url, " **is Vulnerable to R-XSS**")
     elif url_result == False :
-        st.write(url, " is not Vulnerable to R-XSS")
+        st.write(url, " **is not Vulnerable to R-XSS**")
 
 st.markdown( """ 
 # SQL Injection
@@ -70,7 +69,6 @@ st.markdown( """
 """
 , True)
 
-url =  st.text_input("Site with Forms")
 if not url :
     pass
 else :
@@ -79,9 +77,9 @@ else :
     url_result = sql_is_safe(url, session)
 
     if url_result == True :
-        st.write(url, "@ SQL Injection Vulnerability")
+        st.write(url, " **@ SQL Injection Vulnerability**")
     elif url_result == False :
-        st.write(url, "@ No SQL Injection Vulnerability")
+        st.write(url, " **@ No SQL Injection Vulnerability**")
 
 
 st.markdown( """ 

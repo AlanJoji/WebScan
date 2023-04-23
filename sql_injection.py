@@ -99,7 +99,7 @@ def sql_is_safe (url, session) :
     forms = get_forms(url, session)
 
     # From: Number of Forms 
-    st.write("Number of forms detected: ", len(forms), "@", url)
+    st.write("**Number of forms detected:** ", len(forms), "@", url)
     # Till
 
     print("Number of forms detected: ", len(forms))   
