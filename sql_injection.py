@@ -2,15 +2,15 @@
 # By: Alan Joji
 # Created: 19.04.2023
 
+# Libraries
 from requests import *
 from bs4 import BeautifulSoup
 from sys import *
 from urllib.parse import urljoin
 import streamlit as st
 
-# Function
+# Functions
 # Debugging Scripts are placed where required
-
 def get_forms (url, session) :
     """
     Input:  
@@ -96,55 +96,59 @@ def sql_is_safe (url, session) :
     Output:     
         None
     """
-    forms = get_forms(url, session)
+    try :
+        forms = get_forms(url, session)
 
-    # From: Number of Forms 
-    st.write("**Number of forms detected:** ", len(forms), "@", url)
-    # Till
+        # From: Number of Forms 
+        st.write("**Number of forms detected:** ", len(forms), "@", url)
+        # Till
 
-    print("Number of forms detected: ", len(forms))   
+        print("Number of forms detected: ", len(forms))   
 
-    malicious_characters = "\"'"
+        malicious_characters = "\"'"
 
-    for form in forms :
-        details = get_form_details(form)
-        # print("Details:", details["inputs"])
+        for form in forms :
+            details = get_form_details(form)
+            # print("Details:", details["inputs"])
 
-        for character in malicious_characters :
-            data = {}
-            
-            for input_tag in details["inputs"] :
-                if (input_tag["type"] == "hidden" or input_tag["value"]) :
-                    data[input_tag['name']] = input_tag["value"] + character
+            for character in malicious_characters :
+                data = {}
                 
-                elif (input_tag["type"] != "submit") :
-                    data[input_tag['name']] = f"test{character}"
+                for input_tag in details["inputs"] :
+                    if (input_tag["type"] == "hidden" or input_tag["value"]) :
+                        data[input_tag['name']] = input_tag["value"] + character
+                    
+                    elif (input_tag["type"] != "submit") :
+                        data[input_tag['name']] = f"test{character}"
 
-            print(url)
-            # get_form_details(form)
-            # print("Data:", data)
+                print(url)
+                # get_form_details(form)
+                # print("Data:", data)
 
-            if (details["method"].lower() == "post") :
-                response = session.post(url, data = data)
+                if (details["method"].lower() == "post") :
+                    response = session.post(url, data = data)
 
-            elif (details["method"].lower() == "get") :
-                response = session.get(url, params = data)
+                elif (details["method"].lower() == "get") :
+                    response = session.get(url, params = data)
 
-            else :
-                continue
+                else :
+                    continue
 
-            # print("Response:", response)
+                # print("Response:", response)
 
-            if is_sql_vulnerable(response) == True :
-                print("SQL Injection Attack Possible @", url)
-                return True
-                print()
+                if is_sql_vulnerable(response) == True :
+                    print("SQL Injection Attack Possible @", url)
+                    return True
+                    print()
 
-            else :
-                print("No SQL Injection Attack Possible @", url)
-                print()
-                break
-    return False   
+                else :
+                    print("No SQL Injection Attack Possible @", url)
+                    print()
+                    break
+        return False   
+    except :   
+        return False     
+       
 
 def tester () :
     session = Session()

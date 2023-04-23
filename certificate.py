@@ -1,6 +1,7 @@
 # SSL Certificate Checking
 # By: Alan Joji
 # Created: 19.04.2023
+
 from socket import *
 from ssl import *
 from requests import *

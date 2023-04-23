@@ -1,8 +1,14 @@
+# Main
+# By: Alan Joji
+# Created: 22.04.2023
+
+# Libraries
 import streamlit as st
 from certificate import *
 from python_xss import *
 from sql_injection import *
 
+# Main
 st.title("Security Operations Center - Web Vulnerability Scanner Application")
 
 
@@ -15,15 +21,15 @@ st.markdown( """
 """
 , True)
 
-hostname =  st.text_input("Website")
+hostname =  st.text_input("Domain")
 if not hostname :
     pass
 else :
     hostname_result = hostname_is_safe(hostname)
     if hostname_result == True :
-        st.write(hostname, " has a valid SSL Certificate")
+        st.write(hostname, " **has a valid SSL Certificate**")
     elif hostname_result == False :
-        st.write(hostname, " has a invalid/no SSL Certificate")
+        st.write(hostname, " **has a invalid/no SSL Certificate**")
 
 url =  st.text_input("URL")
 if not url :

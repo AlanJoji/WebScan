@@ -1,6 +1,8 @@
 # Simply Python XSS
 # By: Alan Joji
 # Created: 19.04.2023
+
+# Libraries
 from requests import *
 
 # Functions
