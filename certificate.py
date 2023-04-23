@@ -4,7 +4,7 @@
 from socket import *
 from ssl import *
 from requests import *
-
+import streamlit as st
 
 # Functions
 def check_url (url) :
@@ -21,6 +21,9 @@ def check_url (url) :
     try :
         response = get(url, verify = True)
         print(response)
+        # From: Certificate Response 
+        st.write(response)
+        # Till
 
         result = True
         return result
@@ -64,6 +67,11 @@ def check_hostname (context, unsecure_socket, hostname) :
 
         for element in certificate :
             print(element.upper(), ": ", certificate[element])
+
+            # From: Certificate Details 
+            st.write(element.upper(), ": ", certificate[element])
+            # Till
+
             print()
 
         secure_socket.close()

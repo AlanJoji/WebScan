@@ -6,6 +6,7 @@ from requests import *
 from bs4 import BeautifulSoup
 from sys import *
 from urllib.parse import urljoin
+import streamlit as st
 
 # Function
 # Debugging Scripts are placed where required
@@ -96,6 +97,11 @@ def sql_is_safe (url, session) :
         None
     """
     forms = get_forms(url, session)
+
+    # From: Number of Forms 
+    st.write("Number of forms detected: ", len(forms), "@", url)
+    # Till
+
     print("Number of forms detected: ", len(forms))   
 
     malicious_characters = "\"'"
