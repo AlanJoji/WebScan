@@ -51,7 +51,7 @@
 
 **Run the Program**
 ```bash
-    streamlit run main.py
+   streamlit run main.py
 ```
 
 ## Author
